@@ -6,6 +6,23 @@ Build status: ![Build Status](https://circleci.com/gh/alisterscott/webdriver-js-
 
 ## Pre-requisites
 
+```bash
+npm install
+```
+
+```bash
+npm install -g mocha
+```
+
+```bash
+npm install -g chai
+```
+
+```
+npm install -g eslint
+```
+
+--
 #### Make sure you have node-js & chromedriver installed, available via homebrew
 
 `npm install`

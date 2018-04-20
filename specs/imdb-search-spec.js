@@ -25,7 +25,7 @@ test.describe( 'IMDB Search', function() {
 
 	test.it( 'suggest the right suggestions in the search bar', function() {
 		var page = new ImdbHomePage( driver, true );
-		page.search('Ryan Reynolds');
+		page.typeInSearch('Ryan Reynolds');
 		page.getSearchSuggestions().then(function (suggestions) {
       assert.equal( suggestions[0], 'Ryan Reynolds (I)\nActor, Deadpool (2016)', 'Suggestions are not working well...' );
     });

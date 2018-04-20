@@ -12,27 +12,28 @@ test.describe( 'IMDB Search', function() {
 	this.timeout( mochaTimeoutMS );
 
 	test.before( function() {
+    //Todo: Create a driver factory!
 		driver = new webdriver.Builder().withCapabilities( webdriver.Capabilities.chrome() ).build();
-	} );
+	});
 
 	test.it( 'shows the search bar', function() {
 		var page = new ImdbHomePage( driver, true );
-		page.searchBarPresent()
-		.then( function( present ) {
-			assert.equal( present, true, 'Search bar is visible' );
+		page.isSearchBarDisplayed()
+		.then( function( displayed ) {
+			assert.equal( displayed, true, 'Search bar is visible' );
 		} );
-	} );
+	});
 
 	test.it( 'suggest the right suggestions in the search bar', function() {
 		var page = new ImdbHomePage( driver, true );
 		const searchTerm = 'Ryan Reynolds';
 		page.search(searchTerm);
-		var suggestions = page.getSearchSuggestions();
-
-		//assert.deepEqual( searchTerm, [''], 'Suggestions are not working well...' );
-	} );
+		page.getSearchSuggestions().then(function (suggestions) {
+      assert.equal( suggestions[0], 'Ryan Reynolds (I)\nActor, Deadpool (2016)', 'Suggestions are not working well...' );
+    });
+	});
 
 	test.afterEach( () => driver.manage().deleteAllCookies() );
 
-	//test.after( () => driver.quit() );
-} );
+	test.after( () => driver.quit() );
+});

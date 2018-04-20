@@ -2,7 +2,7 @@ import assert from 'assert';
 import webdriver from 'selenium-webdriver';
 import test from 'selenium-webdriver/testing';
 import config from 'config';
-import ImdbHomePage from '../lib/pages/imdb-home-page';
+import ImdbHomePage from '../lib/pages/homepage/imdb-homepage';
 
 let driver;
 
@@ -18,16 +18,14 @@ test.describe( 'IMDB Search', function() {
 
 	test.it( 'shows the search bar', function() {
 		var page = new ImdbHomePage( driver, true );
-		page.isSearchBarDisplayed()
-		.then( function( displayed ) {
+		page.isSearchBarDisplayed().then( function( displayed ) {
 			assert.equal( displayed, true, 'Search bar is visible' );
-		} );
+		});
 	});
 
 	test.it( 'suggest the right suggestions in the search bar', function() {
 		var page = new ImdbHomePage( driver, true );
-		const searchTerm = 'Ryan Reynolds';
-		page.search(searchTerm);
+		page.search('Ryan Reynolds');
 		page.getSearchSuggestions().then(function (suggestions) {
       assert.equal( suggestions[0], 'Ryan Reynolds (I)\nActor, Deadpool (2016)', 'Suggestions are not working well...' );
     });
